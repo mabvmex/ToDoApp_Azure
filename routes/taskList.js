@@ -31,7 +31,7 @@ class TaskList {
     async addTask(req, res) {
         const item = req.body;
 
-        await this.taskObjeto.addTask(item);
+        await this.taskObjeto.addItem(item);
         res.redirect("/");
     }
 
