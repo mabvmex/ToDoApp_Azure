@@ -1,7 +1,7 @@
 const CosmosClient = require("@azure/cosmos").CosmosClient;
-const debug = require("debug")("todo-mongo:task");
+const debug = require("debug")("todo-cosmos:task");
 
-let partitionKey = undefined;
+let partitionKey = undefined; //0;
 
 // MODELO DE DATOS;
 
@@ -24,7 +24,7 @@ class Task {
     async init() {
         debug("Inicializando DB");
         const dbResponse = await this.client.databases.createIfNotExists({
-            "id": "this.databaseID",
+            id: this.databaseID,
         });
 
         this.database = dbResponse.database;
@@ -32,7 +32,7 @@ class Task {
         debug("Inicializando contenedor...");
         const contenedorResponse =
             await this.database.containers.createIfNotExists({
-               "id": "this.containerID",
+                id: this.containerID,
             });
 
         this.container = contenedorResponse.container;
@@ -66,41 +66,66 @@ class Task {
 
         item.date = Date.now();
         item.completed = false;
-
         const { resource: doc } = await this.container.items.create(item);
+
+        console.log(doc);
 
         return doc;
     }
 
     /**
-     * Se actualiza el Item en la DB
-     * @param {string} itemID
+     * Busca un Item en l DB
+     * @param {string} itemId
      * @returns
      */
-    async updateItem(itemID) {
-        debug("actualizando Item");
+    async getItem(itemId) {
+        debug("Buscando Item en la DB");
 
-        const doc = await this.getItem(itemID);
-        doc.completed = true;
+        // const { resource } = await this.container.item(itemId, partitionKey);
+        const { resource } = await this.container.item(itemId).read();
+
+        console.log("Esto es RESOURCE: " + resource);
+        return resource;
+    }
+
+    /**
+     * Se actualiza el Item en la DB
+     * @param {string} itemId
+     * @returns
+     */
+    async updateItem(itemId) {
+        debug("Actualizando Item");
+
+        console.log("Lo que llega en ITEMID es: " + itemId);
+
+        const doc = await this.getItem(itemId);
+        console.log("Esto es DOC: " + doc); // undefined
+
+        if (!doc.completed) {
+            doc.completed = true;
+        } else {
+            doc.completed = false;
+        }
 
         const { resource: replaced } = await this.container
-            .item(itemID, partitionKey)
+            // .item(itemId, partitionKey)
+            .item(itemId)
             .replace(doc);
 
         return replaced;
     }
 
     /**
-     * Busca un Item en l DB
-     * @param {string} itemID
-     * @returns
+     * 
+     * @param {string} itemId 
+     * @returns {replaced};
      */
-    async getItem(itemID) {
-        debug("Buscando Item en la DB");
-
-        const { resource } = await this.container.item(itemID, partitionKey);
-
-        return resource;
+    async deleteItem(itemId) {
+        debug("Eliminando Item");
+        const { resource: replaced } = await this.container
+            .item(itemId)
+            .delete();
+        return replaced;
     }
 }
 

@@ -1,5 +1,5 @@
 {
-  "name": "todo-mongo",
+  "name": "todomongo",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -12,6 +12,7 @@
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
+    "mongodb": "^4.13.0",
     "morgan": "~1.9.1"
   },
   "devDependencies": {

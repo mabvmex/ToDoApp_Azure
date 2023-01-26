@@ -1,6 +1,6 @@
 const CosmosClient = require("@azure/cosmos").CosmosClient;
-const config = require("./routes/config");
-const TaskList = require("./routes/taskList");
+const config = require("./config");
+const TaskList = require("./routes/TaskList");
 const Task = require("./models/task");
 
 const express = require("express");
@@ -31,6 +31,7 @@ const taskObjeto = new Task(
     config.databaseID,
     config.containerID
 );
+
 const taskList = new TaskList(taskObjeto);
 
 taskObjeto
@@ -54,13 +55,17 @@ app.post("/completar", (req, res, next) => {
     taskList.completeTask(req, res).catch(next);
 });
 
+app.post("/eliminar", (req, res, next) => {
+    taskList.deleteTask(req, res).catch(next);
+})
+
 app.set("view engine", "jade");
 
 // MANEJAR UN 404
 app.use(function (req, res, next) {
-    const error = new Error("Not found");
-    error.status = 404;
-    next(error);
+    const err = new Error("Algo salió mal (AQUÍ VA MEME DE UN PERRITO) >>> Error Not Found");
+    err.status = 404;
+    next(err);
 });
 
 module.exports = app;

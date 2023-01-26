@@ -13,18 +13,20 @@ class TaskList {
 
     async showTasks(req, res) {
         const querySpec = {
-            query: "SELECT * FROM root r WHERE r.completed=@completed",
-            // query: "SELECT * FROM c",
-            parameter: {
-                name: "@completed",
-                value: false,
-            },
+            query: "SELECT * FROM root c",
+            // query: "SELECT * FROM root r WHERE r.completed=@completed",
+            parameters: [
+                {
+                    name: "@completed",
+                    value: false,
+                },
+            ],
         };
 
         const items = await this.taskObjeto.find(querySpec);
         res.render("index", {
             title: "Mi lista de pendientes",
-            task: items,
+            tasks: items,
         });
     }
 
@@ -45,6 +47,17 @@ class TaskList {
 
         await Promise.all(tasks);
         res.redirect("/");
+    }
+
+    async deleteTask(req, res) {
+        const completedTask = Object.keys(req.body);
+        const tasks = [];
+
+        completedTask.forEach((task ) => {
+            tasks.push(this.taskObjeto.deleteItem(task));
+        });
+        await Promise.all(tasks)
+        res.redirect("/")
     }
 }
 

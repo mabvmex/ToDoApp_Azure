@@ -1,41 +1,72 @@
 extends layout
 
 block content
-  h1= title
-  br
-  
-  form(action="/completar", method="post")
-    table.table.table-stripped.table-bordered
-        tr
-            td Nombre 
-            td Categoría
-            td Fecha 
-            td Complete
-        if (typeof task === "undefined")
-            tr
-                td 
-        else
-            each task in tasks
-                tr
-                    td #{task.name}
-                    td #{task.category}
-                    - var date = New Date();
-                    - var day = date.getDate();
-                    - var month = date.getMonth() + 1;
-                    - var year = date.getFullYear() + 1;
-                    td #{day + "/" + month + "/" + year }
-                    td 
-                        if (task.completed)
-                            input(type="checkbox", name="#{task.id}", value="#{!task.completed}", checked=task.completed )
-                        else
-                            input(type="checkbox", name="#{task.id}", value="#{!task.completed}", checked=task.completed )
+    h1 #{title}
+    br
 
-        button.btn.btn-primary(type="submit") Actualizar tareas
-    hr
-    form.well(action="/agregar", method="post")
-        label Item name:
-        input(name="name", type="textbox")
-        label Item category:
-        input(name="category", type="textbox")
-        br
-        button.btn(type="submit") Añadir tarea
+    //- SECCIÓN PARA AGREGAR TAREA
+
+    div(style="display:flex; flex-direction: row;")
+    form.well.well-lg(action="/agregar" method="post" style="background-color:#606d80; color:#dce0e6; border-color: #606d80")
+        label(style='margin: 0px 20px 0px 0px;  display: inline')
+            label Nueva tarea:
+        input(name="name" type="textbox" style='color:#0e0e0e;')
+        label(style='margin: 0px 20px 0px 20px;  display: inline;')
+            label Categoría:
+        input(name="category" type="textbox" style='color:#0e0e0e;')
+        button.btn.btn.btn-success(type="submit" style='margin-left:50px') Agregar tarea
+
+    //- SECCIÓN DE BOTONERA PARA FILTRAR/MODIFICAR
+
+    div.well(style="display:flex;flex-direction:row; background-color:#606d80; border-color: #606d80; display: flex; justify-content: space-evenly; margin-top: -24px")
+        button.btn.btn-primary(type="subm it") Actualizar tareas
+        button.btn.btn-primary(type="subm it") Tareas completas
+        button.btn.btn-primary(type="subm it") Todas las tareas
+    br
+
+    //- SECCIÓN PARA MOSTRAR LAS TAREAS 
+
+    //- form(action="/eliminar" method="post" style="background-color: #7890a8; color: #fff")
+    form(action="/eliminar" method="post" style="background-color: #7890a8; color: #fff")
+
+        table.table.table-stripped.table-bordered
+            tr
+                td Nombre 
+                td Categoría
+                td Fecha 
+                td Estado
+                td Eliminar
+
+            if(typeof tasks === "undefined")
+                tr
+                    td 
+            else
+                each task in tasks
+                    tr
+                        td #{task.name} 
+                        td #{task.category}
+                        - let date = new Date(task.date);
+                        - let day = date.getDate();
+                        - let month = date.getMonth() + 1;
+                        - let year = date.getFullYear();
+                            - if (month <= 9) { month = "0" + month  };
+                        td #{day + "/" + month + "/" + year }
+                        td 
+                             //- SECCIÓN PARA COMPLETAR LAS TAREAS 
+
+                            //- form(action="/completar" method="post")
+                            //- button.btn.btn.btn-info(name="#{task.id}" type="submit" style='margin: auto; display: flex') Completar
+
+                            if(task.completed)
+                                button(name="#{task.id}" value="#{!task.completed}", onclick=() => {this.value = !this.value}, style="background-color:transparent;border:none;text-decoration:line-through;") Completo
+                            //-     input(type="checkbox" name="#{task.id}" value="#{task.completed}", checked=task.completed)
+                            else 
+                                button(name="#{task.id}" value="#{task.completed}", onclick=() => {this.value = !this.value}, style="background-color:transparent;border:none;text-decoration:none;") Incompleto
+                            //-     input(type="checkbox" name="#{task.id}" value="#{!task.completed}", checked=task.completed)
+                        td
+                            //- SECCIÓN DE BOTÓN PARA ELIMINAR
+
+                            form(action="/eliminar" method="post")
+                                button.btn.btn.btn-danger(name="#{task.id}" type="submit" style='margin: auto; display: flex') Eliminar
+                            //- task#{itemId}
+        hr

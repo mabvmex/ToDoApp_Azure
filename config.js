@@ -7,7 +7,7 @@ config.authKey = process.env.AUTHKEY;
 config.databaseID = "ToDoList";
 config.containerID = "Items";
 
-if (config.host.includes("//localhost")) {
+if(config.host.includes("//localhost")) {
     process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 }
 
