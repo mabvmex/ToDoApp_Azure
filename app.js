@@ -51,8 +51,26 @@ app.post("/agregar", (req, res, next) => {
     taskList.addTask(req, res).catch(next);
 });
 
-app.post("/completar", (req, res, next) => {
+app.get("/pendientes", (req, res, next) => {
+    taskList.showPendingTasks(req, res).catch(next);
+});
+
+
+
+
+
+// completeTask   toMarkTasksCompleted
+app.post("/realizar", (req, res, next) => {
     taskList.completeTask(req, res).catch(next);
+});
+
+
+
+
+
+
+app.get("/realizado", (req, res, next) => {
+    taskList.showTasksCompleted(req, res).catch(next);
 });
 
 app.post("/eliminar", (req, res, next) => {

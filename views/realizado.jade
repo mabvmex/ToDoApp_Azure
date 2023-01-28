@@ -1,0 +1,48 @@
+extends layout
+
+block content
+    h1 #{title}
+    br
+    
+    //- SECCIÓN PARA MOSTRAR LAS TAREAS 
+    form(action="/eliminar" method="post" style="background-color: #7890a8; color: #fff")
+
+        table.table.table-stripped.table-bordered
+            tr
+                td Nombre 
+                td Categoría
+                td Fecha 
+                td Estado
+                td Eliminar
+
+            if(typeof tasks === "undefined")
+                tr
+                    td 
+            else
+                each task in tasks
+                    tr
+                        td #{task.name} 
+                        td #{task.category}
+                        - let date = new Date(task.date);
+                        - let day = date.getDate();
+                        - let month = date.getMonth() + 1;
+                        - let year = date.getFullYear();
+                            - if (month <= 9) { month = "0" + month  };
+                        td #{day + "/" + month + "/" + year }
+                        td 
+
+                            //- SECCIÓN PARA COMPLETAR LAS TAREAS 
+
+                            form(action="/realizado" method="post")
+                                button.btn.btn.btn-info(name="#{task.id}" type="submit" style='margin: auto; display: flex') Completar
+                            if(task.completed)
+                                button(name="#{task.id}" value="#{!task.completed}", onclick=() => {this.value = !this.value}, style="background-color:transparent;border:none;text-decoration:line-through;") Completo
+                            else 
+                                button(name="#{task.id}" value="#{task.completed}", onclick=() => {this.value = !this.value}, style="background-color:transparent;border:none;text-decoration:none;") Incompleto
+                        td  
+                            button.btn.btn.btn-danger(name="#{task.id}" type="submit" style='margin: auto; display: flex') Eliminar
+hr
+
+                            //-     input(type="checkbox" name="#{task.id}" value="#{task.completed}", checked=task.completed)
+                            //-     input(type="checkbox" name="#{task.id}" value="#{!task.completed}", checked=task.completed)
+//- task#{itemId}

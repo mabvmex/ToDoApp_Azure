@@ -1,6 +1,6 @@
-const Task = require("../models/task");
-
 // ESTE ES EL CONTROLADOR
+
+const Task = require("../models/task");
 
 class TaskList {
     /**
@@ -11,10 +11,41 @@ class TaskList {
         this.taskObjeto = taskObjeto;
     }
 
+    // CRUD - LEER TAREA
     async showTasks(req, res) {
         const querySpec = {
             query: "SELECT * FROM root c",
-            // query: "SELECT * FROM root r WHERE r.completed=@completed",
+        };
+
+        const items = await this.taskObjeto.find(querySpec);
+        res.render("index", {
+            title: "Todas las tareas",
+            tasks: items,
+        });
+    }
+
+    async showTasksCompleted(req, res) {
+        const querySpec = {
+            query: "SELECT * FROM root c WHERE c.completed=@completed",
+            parameters: [
+                {
+                    name: "@completed",
+                    value: true,
+                },
+            ],
+        };
+
+        const items = await this.taskObjeto.find(querySpec);
+        res.render("realizado", {
+            title: "Tareas realizadas",
+            tasks: items,
+        });
+        res.redirect("/realizado");
+    }
+
+    async showPendingTasks(req, res) {
+        const querySpec = {
+            query: "SELECT * FROM root c WHERE c.completed=@completed",
             parameters: [
                 {
                     name: "@completed",
@@ -24,12 +55,15 @@ class TaskList {
         };
 
         const items = await this.taskObjeto.find(querySpec);
-        res.render("index", {
-            title: "Mi lista de pendientes",
+
+        res.render("pendientes", {
+            title: "Tareas pendientes",
             tasks: items,
         });
+        res.redirect("/pendientes");
     }
 
+    // CRUD - CREAR TAREA
     async addTask(req, res) {
         const item = req.body;
 
@@ -37,6 +71,7 @@ class TaskList {
         res.redirect("/");
     }
 
+    // CRUD - ACTUALIZAR TAREA
     async completeTask(req, res) {
         const completedTask = Object.keys(req.body);
         const tasks = [];
@@ -49,15 +84,20 @@ class TaskList {
         res.redirect("/");
     }
 
+    // async toMarkTasksCompleted (req, res) {
+    //     const
+    // }
+
+    // CRUD - ELIMINAR TAREA
     async deleteTask(req, res) {
         const completedTask = Object.keys(req.body);
         const tasks = [];
 
-        completedTask.forEach((task ) => {
+        completedTask.forEach((task) => {
             tasks.push(this.taskObjeto.deleteItem(task));
         });
-        await Promise.all(tasks)
-        res.redirect("/")
+        await Promise.all(tasks);
+        res.redirect("/");
     }
 }
 
