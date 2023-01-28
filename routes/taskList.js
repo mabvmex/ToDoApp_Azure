@@ -40,7 +40,6 @@ class TaskList {
             title: "Tareas realizadas",
             tasks: items,
         });
-        res.redirect("/realizado");
     }
 
     async showPendingTasks(req, res) {
@@ -55,12 +54,10 @@ class TaskList {
         };
 
         const items = await this.taskObjeto.find(querySpec);
-
         res.render("pendientes", {
             title: "Tareas pendientes",
             tasks: items,
         });
-        res.redirect("/pendientes");
     }
 
     // CRUD - CREAR TAREA
