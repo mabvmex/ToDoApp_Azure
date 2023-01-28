@@ -7,18 +7,46 @@ html
         link(rel="stylesheet" href="/stylesheets/style.css")
     body
 
-        //- nav.navbar.navbar-inverse.navbar-fixed-top
-        //-     div.navbar-header
-        //-         a.navbar-brand(href="#") Mi App de tareas por hacer
-        //- br
-
-
         nav.navbar.navbar-dark.bg-dark.navbar.fixed-top
             div.navbar-header
                 a.navbar-brand(href="#") &nbsp; &nbsp; &nbsp; Mi App de tareas por hacer
         br
+    
+    h1 #{title}
 
-        block content
-        //- script(src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.2.min.js")
-        //- script(src="//ajax.aspnetcdn.com/ajax/bootstrap/3.3.2/bootstrap.min.js")
-        script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous")
+    //- SECCIÓN PARA AGREGAR TAREA
+    div.d-flex
+    form.card.d-flex.flex-row.justify-content-evenly.align-items-center(action="/agregar" method="post" class="estilo_personalizado")
+        label Nueva tarea:
+        input(name="name" type="textbox")
+
+        label Categoría:
+        input(name="category" type="textbox")
+
+        button.btn.btn-warning(type="submit" class="margen" ) Agregar tarea 
+
+    //- SECCIÓN PARA BUSCAR TAREA
+    form.card.d-flex.flex-row.justify-content-evenly.align-items-center(action="/buscar" method="get" class="estilo_personalizado")
+        label Nombre de tarea:
+        input(name="category" type="textbox")
+
+        button.btn.btn-primary(type="submit" class="margen") Buscar tarea
+
+    //- SECCIÓN DE BOTONERA PARA FILTRAR/MODIFICAR
+    div.card.d-flex.flex-row.justify-content-evenly.align-items-center(class="estilo_personalizado")
+        form(action="/" method="get")
+            button.btn.btn-warning(type="submit" class="margen_10") Actualizar tareas
+        form(action="/realizado" method="get")
+            button.btn.btn-success(type="submit" class="margen_10") Tareas completas
+        form(action="/pendientes" method="get")
+            button.btn.btn-dark(type="submit" class="margen_10") Tareas pendientes
+
+
+    br
+    br
+    br
+
+block content
+//- script(src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.2.min.js")
+//- script(src="//ajax.aspnetcdn.com/ajax/bootstrap/3.3.2/bootstrap.min.js")
+script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous")

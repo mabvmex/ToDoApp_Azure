@@ -7,3 +7,22 @@ body {
 a {
     color: #00b7ff;
 }
+
+.estilo_personalizado {
+    height:50px;
+    color:#dce0e6;
+    background-color:#606d80;
+    border-color: #606d80;
+}
+
+.margen {
+    padding: 5px; 
+    margin-top: 5px; 
+    margin-bottom: 5px
+}
+
+.margen_10 {
+    padding: 5px; 
+    margin-top: 5px; 
+    margin-bottom: 10px
+}
