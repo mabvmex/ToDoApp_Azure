@@ -81,10 +81,6 @@ class TaskList {
         res.redirect("/");
     }
 
-    // async toMarkTasksCompleted (req, res) {
-    //     const
-    // }
-
     // CRUD - ELIMINAR TAREA
     async deleteTask(req, res) {
         const completedTask = Object.keys(req.body);

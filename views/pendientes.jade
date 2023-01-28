@@ -34,15 +34,13 @@ block content
                             //- SECCIÓN PARA COMPLETAR LAS TAREAS 
 
                             form(action="/realizado" method="post")
-                                button.btn.btn.btn-info(name="#{task.id}" type="submit" style='margin: auto; display: flex') Completar
+                                button.btn.btn-info(name="#{task.id}" type="submit" style='margin: auto; display: flex') Completar
                             if(task.completed)
                                 button(name="#{task.id}" value="#{!task.completed}", onclick=() => {this.value = !this.value}, style="background-color:transparent;border:none;text-decoration:line-through;") Completo
                             else 
                                 button(name="#{task.id}" value="#{task.completed}", onclick=() => {this.value = !this.value}, style="background-color:transparent;border:none;text-decoration:none;") Incompleto
                         td  
-                            button.btn.btn.btn-danger(name="#{task.id}" type="submit" style='margin: auto; display: flex') Eliminar
+                            //- SECCIÓN DE BOTÓN PARA ELIMINAR
+                            form(action="/eliminar" method="post")
+                            button.btn.btn-danger(name="#{task.id}" type="submit" style='margin: auto; display: flex') Eliminar
 hr
-
-                            //-     input(type="checkbox" name="#{task.id}" value="#{task.completed}", checked=task.completed)
-                            //-     input(type="checkbox" name="#{task.id}" value="#{!task.completed}", checked=task.completed)
-//- task#{itemId}

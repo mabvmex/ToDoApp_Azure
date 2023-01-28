@@ -55,19 +55,9 @@ app.get("/pendientes", (req, res, next) => {
     taskList.showPendingTasks(req, res).catch(next);
 });
 
-
-
-
-
-// completeTask   toMarkTasksCompleted
 app.post("/realizar", (req, res, next) => {
     taskList.completeTask(req, res).catch(next);
 });
-
-
-
-
-
 
 app.get("/realizado", (req, res, next) => {
     taskList.showTasksCompleted(req, res).catch(next);
@@ -75,13 +65,15 @@ app.get("/realizado", (req, res, next) => {
 
 app.post("/eliminar", (req, res, next) => {
     taskList.deleteTask(req, res).catch(next);
-})
+});
 
 app.set("view engine", "jade");
 
 // MANEJAR UN 404
 app.use(function (req, res, next) {
-    const err = new Error("Algo salió mal (AQUÍ VA MEME DE UN PERRITO) >>> Error Not Found");
+    const err = new Error(
+        "Algo salió mal (AQUÍ VA MEME DE UN PERRITO) >>> Error Not Found"
+    );
     err.status = 404;
     next(err);
 });

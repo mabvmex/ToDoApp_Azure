@@ -6,32 +6,31 @@ block content
     //- SECCIÓN PARA AGREGAR TAREA
 
     div(style="display:flex;")
-    form.well.well-lg(action="/agregar" method="post" style="display:flex; flex-direction:row; justify-content: space-evenly; margin-bottom: 0px; background-color:#606d80; color:#dce0e6; border-color: #606d80;")
+    form.card(action="/agregar" method="post" style="display:flex; flex-direction:row; justify-content: space-evenly; align-items: center; height:50px; background-color:#606d80; color:#dce0e6; border-color: #606d80")
         label(style='display: inline;')
             label Nueva tarea:
-        input(name="name" type="textbox" style='color:#0e0e0e; max-height:25px')
-
+        input(name="name" type="textbox")
         label(style='display: inline;')
             label Categoría:
-        input(name="category" type="textbox" style='color:#0e0e0e; max-height:25px')
+        input(name="category" type="textbox")
 
-        button.btn.btn.btn-warning(type="submit" style='margin-left:50px') Agregar tarea
+        button.btn.btn-warning(type="submit" style='padding: 5px; margin-top: 5px; margin-bottom: 5px;') Agregar tarea 
 
 
     //- SECCIÓN DE BOTONERA PARA FILTRAR/MODIFICAR
 
-    div.well(style="display:flex; flex-direction:row; justify-content: space-evenly; margin-top: -24px; background-color:#606d80; border-color: #606d80;")
+    div.card(style="display:flex; flex-direction:row; justify-content: space-evenly; background-color:#606d80; border-color: #606d80; height:50px")
         form(action="/" method="get")
-            button.btn.btn-primary(type="subm it") Actualizar tareas
+            button.btn.btn-primary(type="submit" style='padding: 5px; margin-top: 5px; margin-bottom: 10px;') Actualizar tareas
         form(action="/realizado" method="get")
-            button.btn.btn-success(type="subm it") Tareas completas
+            button.btn.btn-success(type="submit" style='padding: 5px; margin-top: 5px; margin-bottom: 10px;') Tareas completas
         form(action="/pendientes" method="get")
-            button.btn.btn-dark(type="subm it") Tareas pendientes
+            button.btn.btn-dark(type="submit" style='padding: 5px; margin-top: 5px; margin-bottom: 10px;') Tareas pendientes
     br
+
     //- SECCIÓN PARA MOSTRAR LAS TAREAS 
-    //- form(action="/eliminar" method="post" style="background-color: #7890a8; color: #fff")
-        
-    form( style="background-color: #7890a8; color: #fff")
+
+    form(action="/realizar" method="post" style="background-color: #7890a8; color: #fff; display:flex; justify-content: center; align-items: center;")
         table.table.table-stripped.table-bordered
             tr
                 td Nombre 
@@ -57,18 +56,19 @@ block content
                         td 
 
                             //- SECCIÓN PARA COMPLETAR LAS TAREAS 
-
                             form(action="/realizar" method="post")
-                                button.btn.btn.btn-info(name="#{task.id}" type="submit" style='margin: auto; display: flex') Completar
+                                button.btn.btn-info(name="#{task.id}" type="submit" style='margin: auto; display: flex') Completar
+
                             if(task.completed)
                                 //- button(name="#{task.id}" value="#{!task.completed}", onclick=() => {this.value = !this.value}, style="background-color:transparent; border:none; text-decoration:line-through;") Realizado
                                 input(type="checkbox" name="#{task.id}" value="#{task.completed}", checked=task.completed)
-                                label #{task.name}
+                                label #{task.id}
                             else 
                                 //- button(name="#{task.id}" value="#{task.completed}", onclick=() => {this.value = !this.value}, style="background-color:transparent; border:none; text-decoration:none;") Pendiente
                                 input(type="checkbox" name="#{task.id}" value="#{!task.completed}", checked=task.completed)
                                 label #{task.name}
                         td  
+                            //- SECCIÓN PARA ELIMINAR LAS TAREAS 
                             form(action="/eliminar" method="post")
-                            button.btn.btn.btn-danger(name="#{task.id}" type="submit" style='margin: auto; display: flex') Eliminar
+                                button.btn.btn-danger(name="#{task.id}" type="submit" style='margin: auto; display: flex') Eliminar
 hr

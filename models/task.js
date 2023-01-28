@@ -93,16 +93,23 @@ class Task {
      */
     async updateItem(itemId) {
         debug("Actualizando Item");
-        console.log("Lo que llega en ITEMID es: " + itemId); // Regresa el Id de la tarea
+        console.log("Esto es el ITEMID: " + itemId); // Regresa el Id de la tarea
 
         const { resource: doc } = await this.container.item(itemId).read();
-        console.log("Esto es DOC: ", { doc }); // Regresa el objeto completo
-
+        console.log("============");
+        console.log("Esto es DOC: ", "==>", doc.name); // Regresa el objeto completo
+        console.log("Esto es DOC: ", "==>", doc.id); // Regresa el objeto completo
+        console.log("Esto es DOC: ", "==>", doc.completed); // Regresa el objeto completo
+        
         if (!doc.completed) {
             doc.completed = true;
         } else {
             doc.completed = false;
         }
+        console.log("Esto es DOC: ", "==>", doc.name); // Regresa el objeto completo
+        console.log("Esto es DOC después del click: ", "==>", doc.id); // Regresa el objeto completo
+        console.log("Esto es DOC después del click: ", "==>", doc.completed); // Regresa el objeto completo
+        console.log("============");
 
         const { resource: replaced } = await this.container
             .item(itemId)
