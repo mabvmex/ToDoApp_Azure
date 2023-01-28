@@ -1,46 +1,46 @@
 extends layout
 
 block content
-    
-    //- SECCIÓN PARA MOSTRAR LAS TAREAS 
-    form(action="/eliminar" method="post" style="background-color: #7890a8; color: #fff")
 
+    //- SECCIÓN PARA MOSTRAR LAS TAREAS 
+    form(action="/realizar" method="post" style="background-color: #7890a8; color: #fff; display:flex; justify-content: center; align-items: center;")
         table.table.table-stripped.table-bordered
             tr
-                td Nombre 
-                td Categoría
-                td Fecha 
-                td Estado
-                td Eliminar
+                td.fs-6.text-center.bg-primary.text-white Nombre 
+                td.fs-6.text-center.bg-primary.text-white Categoría
+                td.fs-6.text-center.bg-primary.text-white Fecha 
+                td.fs-6.text-center.bg-primary.text-white Estado
+                td.fs-6.text-center.bg-primary.text-white Eliminar
 
             if(typeof tasks === "undefined")
-                tr
-                    td 
+               tr
+                   td 
             else
-                each task in tasks
-                    tr
-                        td #{task.name} 
-                        td #{task.category}
-                        - let date = new Date(task.date);
-                        - let day = date.getDate();
-                        - let month = date.getMonth() + 1;
-                        - let year = date.getFullYear();
-                            - if (month <= 9) { month = "0" + month  };
-                        td #{day + "/" + month + "/" + year }
-                        td 
+               each task in tasks
+                   tr
+                       td #{task.name} 
+                       td #{task.category}
+                       - let date = new Date(task.date);
+                       - let day = date.getDate();
+                       - let month = date.getMonth() + 1;
+                       - let year = date.getFullYear();
+                           - if (month <= 9) { month = "0" + month  };
+                       td #{day + "/" + month + "/" + year }
+                       td
 
                             //- SECCIÓN PARA COMPLETAR LAS TAREAS 
-
-                            form(action="/realizado" method="post")
-                                button.btn.btn.btn-info(name="#{task.id}" type="submit" style='margin: auto; display: flex') Completar
+                            form(action="/realizar" method="post")
+                                button.btn.btn-info(name="#{task.id}" type="submit" style='margin: auto; display: flex') Completar
                             if(task.completed)
-                                button(name="#{task.id}" value="#{!task.completed}", onclick=() => {this.value = !this.value}, style="background-color:transparent;border:none;text-decoration:line-through;") Completo
+                                button(name="#{task.id}" value="#{!task.completed}", onclick=() => {this.value = !this.value}, style="background-color: transparent; border: none; text-decoration: line-through;") Realizado
+                                input(type="checkbox" name="#{task.id}" value="#{task.completed}", checked=task.completed)
+                                label #{task.id}
                             else 
-                                button(name="#{task.id}" value="#{task.completed}", onclick=() => {this.value = !this.value}, style="background-color:transparent;border:none;text-decoration:none;") Incompleto
-                        td  
-                            button.btn.btn.btn-danger(name="#{task.id}" type="submit" style='margin: auto; display: flex') Eliminar
-hr
+                                button(name="#{task.id}" value="#{task.completed}", onclick=() => {this.value = !this.value}, style="background-color: transparent; border: none; text-decoration: none;") Pendiente
+                                input(type="checkbox" name="#{task.id}" value="#{!task.completed}", checked=task.completed)
+                                label #{task.id}
+                        td
 
-                            //-     input(type="checkbox" name="#{task.id}" value="#{task.completed}", checked=task.completed)
-                            //-     input(type="checkbox" name="#{task.id}" value="#{!task.completed}", checked=task.completed)
-//- task#{itemId}
+                            //- SECCIÓN PARA ELIMINAR LAS TAREAS
+                            form(action="/eliminar" method="post")
+                                button.btn.btn-danger(name="#{task.id}" type="submit" style='margin: auto; display: flex') Eliminar
