@@ -2,8 +2,9 @@ extends layout
 
 block content
 
-    //- SECCIÓN PARA MOSTRAR LAS TAREAS 
-    form(action="/realizar" method="post" style="background-color: #7890a8; color: #fff; display:flex; justify-content: center; align-items: center;")
+    //- SECCIÓN PARA MOSTRAR LAS TAREAS
+
+    form.d-flex.justify-content-center.align-items-center.text-white(action="/realizar" method="post" style="background-color: #7890a8;")
         table.table.table-stripped.table-bordered
             tr
                 td.fs-6.text-center.bg-primary.text-white Nombre 
@@ -18,29 +19,29 @@ block content
             else
                each task in tasks
                    tr
-                       td #{task.name} 
-                       td #{task.category}
+                       td.text-dark #{task.name} 
+                       td.text-dark #{task.category}
                        - let date = new Date(task.date);
                        - let day = date.getDate();
                        - let month = date.getMonth() + 1;
                        - let year = date.getFullYear();
                            - if (month <= 9) { month = "0" + month  };
-                       td #{day + "/" + month + "/" + year }
-                       td
+                       td.text-dark #{day + "/" + month + "/" + year }
+                       td.text-dark
 
                             //- SECCIÓN PARA COMPLETAR LAS TAREAS 
                             form(action="/realizar" method="post")
-                                button.btn.btn-info(name="#{task.id}" type="submit" style='margin: auto; display: flex') Completar
+                                button.btn.btn-info.d-flex.m-auto.text-dark(name="#{task.id}" type="submit") Completar
                             if(task.completed)
-                                button(name="#{task.id}" value="#{!task.completed}", onclick=() => {this.value = !this.value}, style="background-color: transparent; border: none; text-decoration: line-through;") Realizado
+                                button.bg-transparent.border-0.text-decoration-line-through.text-dark(name="#{task.id}" value="#{!task.completed}", onclick=() => {this.value = !this.value}) Realizado
                                 input(type="checkbox" name="#{task.id}" value="#{task.completed}", checked=task.completed)
                                 label #{task.id}
                             else 
-                                button(name="#{task.id}" value="#{task.completed}", onclick=() => {this.value = !this.value}, style="background-color: transparent; border: none; text-decoration: none;") Pendiente
+                                button.bg-transparent.border-0.text-dark(name="#{task.id}" value="#{task.completed}", onclick=() => {this.value = !this.value}) Pendiente
                                 input(type="checkbox" name="#{task.id}" value="#{!task.completed}", checked=task.completed)
                                 label #{task.id}
                         td
 
                             //- SECCIÓN PARA ELIMINAR LAS TAREAS
                             form(action="/eliminar" method="post")
-                                button.btn.btn-danger(name="#{task.id}" type="submit" style='margin: auto; display: flex') Eliminar
+                                button.d-flex.btn.btn-danger.m-auto(name="#{task.id}" type="submit") Eliminar

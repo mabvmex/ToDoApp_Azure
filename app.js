@@ -58,9 +58,12 @@ app.get("/pendientes", (req, res, next) => {
 app.post("/realizar", (req, res, next) => {
     taskList.completeTask(req, res).catch(next);
 });
-
 app.get("/realizado", (req, res, next) => {
     taskList.showTasksCompleted(req, res).catch(next);
+});
+
+app.get("/buscar", (req, res, next) => {
+    taskList.findTask(req, res).catch(next);
 });
 
 app.post("/eliminar", (req, res, next) => {
@@ -71,11 +74,15 @@ app.set("view engine", "jade");
 
 // MANEJAR UN 404
 app.use(function (req, res, next) {
-    const err = new Error(
-        "Algo salió mal (AQUÍ VA MEME DE UN PERRITO) >>> Error Not Found"
-    );
-    err.status = 404;
-    next(err);
+    const error = new Error("Not Found");
+
+    error.status = 404;
+
+    next(error);
+    res.render("error", {
+        title: "Algo salió mal...",
+        error,
+    });
 });
 
 module.exports = app;

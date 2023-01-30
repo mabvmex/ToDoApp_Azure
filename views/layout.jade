@@ -9,10 +9,12 @@ html
 
         nav.navbar.navbar-dark.bg-dark.navbar.fixed-top
             div.navbar-header
-                a.navbar-brand(href="#") &nbsp; &nbsp; &nbsp; Mi App de tareas por hacer
+                a.navbar-brand(href="/") &nbsp; &nbsp; &nbsp; Mi App de tareas por hacer
         br
     
     h1 #{title}
+    br
+    br
 
     //- SECCIÓN PARA AGREGAR TAREA
     div.d-flex
@@ -28,14 +30,14 @@ html
     //- SECCIÓN PARA BUSCAR TAREA
     form.card.d-flex.flex-row.justify-content-evenly.align-items-center(action="/buscar" method="get" class="estilo_personalizado")
         label Nombre de tarea:
-        input(name="category" type="textbox")
+        input(name="name" type="textbox")
 
         button.btn.btn-primary(type="submit" class="margen") Buscar tarea
 
     //- SECCIÓN DE BOTONERA PARA FILTRAR/MODIFICAR
     div.card.d-flex.flex-row.justify-content-evenly.align-items-center(class="estilo_personalizado")
         form(action="/" method="get")
-            button.btn.btn-warning(type="submit" class="margen_10") Actualizar tareas
+            button.btn.btn-warning(type="submit" class="margen_10") Todas las tareas
         form(action="/realizado" method="get")
             button.btn.btn-success(type="submit" class="margen_10") Tareas completas
         form(action="/pendientes" method="get")

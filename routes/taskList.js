@@ -1,5 +1,6 @@
 // ESTE ES EL CONTROLADOR
 
+const { query } = require("express");
 const Task = require("../models/task");
 
 class TaskList {
@@ -57,6 +58,24 @@ class TaskList {
         res.render("pendientes", {
             title: "Tareas pendientes",
             tasks: items,
+        });
+    }
+
+    async findTask(req, res) {
+        const querySpec = {
+            query: "SELECT * FROM root c WHERE c.name=@name",
+            parameters: [
+                {
+                    name: "@name",
+                    value: req.query.name,
+                },
+            ],
+        };
+
+        const item = await this.taskObjeto.find(querySpec);
+        res.render("index", {
+            title: "Resultados de búsqueda",
+            tasks: item,
         });
     }
 

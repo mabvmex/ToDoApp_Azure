@@ -1,6 +1,21 @@
 extends layout
 
+link(rel="stylesheet" href="/stylesheets/style.css")
 block content
-    h1= message
-    h2= error.status
-    pre #{error.stack}
+
+    body.background-error
+    div.d-flex.flex-column.justify-content-center.align-items-center
+        div
+            h1 #{error.status}: Nada por aquí    
+        div
+        img.border.border-dark(src='https://www.publicdomainpictures.net/pictures/50000/velka/dog-1373127384GhB.jpg' width='400' height='350' alt='error' )
+        //- img.border.border-dark(src='../public/images/puppy.jpg' width='400px' height='350px' alt='error' )
+    br 
+
+    div
+        input.d-none(type="checkbox" id="showText")
+        label.mt-auto.fst-italic(for="showText" id="toggle-btn") Click aquí para saber más...
+ 
+        br
+        div(class="errstack")
+            pre.card.mt-2.text-dark.p-3 #{error.stack}

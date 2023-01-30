@@ -69,8 +69,6 @@ class Task {
         item.date = Date.now();
         item.completed = false;
         const { resource: doc } = await this.container.items.create(item);
-
-        console.log(doc); // Muestra Objeto creado completo
         return doc;
     }
 
@@ -81,35 +79,27 @@ class Task {
     //  */
     // async getItem(itemId) {
     //     debug("Buscando Item en la DB");
+
     //     const { resource: doc } = await this.container.item(itemId).read();
-    //     console.log("Esto es RESOURCE: ", { doc }); // Regresa el objeto completo
     //     return doc;
     // }
 
     /**
-     * ACTUALIZA EL ITEM EN LA DB
+     * ACTUALIZA EL ESTADO DE UN ITEM EN LA DB
+     * completado / pendiente
      * @param {string} itemId
      * @returns
      */
     async updateItem(itemId) {
         debug("Actualizando Item");
-        console.log("Esto es el ITEMID: " + itemId); // Regresa el Id de la tarea
 
         const { resource: doc } = await this.container.item(itemId).read();
-        console.log("============");
-        console.log("Esto es DOC: ", "==>", doc.name); // Regresa el objeto completo
-        console.log("Esto es DOC: ", "==>", doc.id); // Regresa el objeto completo
-        console.log("Esto es DOC: ", "==>", doc.completed); // Regresa el objeto completo
-        
+
         if (!doc.completed) {
             doc.completed = true;
         } else {
             doc.completed = false;
         }
-        console.log("Esto es DOC: ", "==>", doc.name); // Regresa el objeto completo
-        console.log("Esto es DOC después del click: ", "==>", doc.id); // Regresa el objeto completo
-        console.log("Esto es DOC después del click: ", "==>", doc.completed); // Regresa el objeto completo
-        console.log("============");
 
         const { resource: replaced } = await this.container
             .item(itemId)

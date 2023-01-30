@@ -8,21 +8,53 @@ a {
     color: #00b7ff;
 }
 
+.background-error {
+    background-color: #262c2c;
+    color: #dce0e6;
+}
+
 .estilo_personalizado {
-    height:50px;
-    color:#dce0e6;
-    background-color:#606d80;
+    height: 50px;
+    color: #dce0e6;
+    background-color: #606d80;
     border-color: #606d80;
 }
 
 .margen {
-    padding: 5px; 
-    margin-top: 5px; 
-    margin-bottom: 5px
+    padding: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .margen_10 {
-    padding: 5px; 
-    margin-top: 5px; 
-    margin-bottom: 10px
+    padding: 5px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+/* Hide expandable content by default */
+.errstack {
+    visibility: collapse;
+    font-size: 11px;
+}
+
+/* Style the button */
+#toggle-btn {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 5px 11px;
+    cursor: pointer;
+    font-size: 12px;
+    color: #00b7ff;
+    margin-left: 75%;
+}
+
+/* Show hidden content when the checkbox is checked */
+#showText:checked ~ .errstack {
+    visibility: visible;
+}
+
+/* Style the button when the checkbox is checked */
+#showText:checked + #toggle-btn {
+    color: lightblue;
 }
