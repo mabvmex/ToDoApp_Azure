@@ -16,42 +16,54 @@ html
     br
     br
 
-    //- SECCIÓN PARA AGREGAR TAREA
-    div.d-flex
-    form.card.d-flex.flex-row.justify-content-evenly.align-items-center(action="/agregar" method="post" class="estilo_personalizado")
-        label Nueva tarea:
-        input(name="name" type="textbox" required)
+    div.border.border-dark.border-5.rounded(class="estilo_personalizado" style="width: 120vh; margin:auto;")
+        table.table.table-stripped.table-bordered
+            tr
+                td.fs-6.text-center.bg-primary.text-white(colspan="3") Panel de tareas
+                    
 
-        label Categoría:
-        input(name="category" type="textbox" required)
+        div.d-flex.border.border-1.border-top-0.justify-content-center(class="estilo_clase")
 
-        button.btn.btn-warning(type="submit" class="margen") Agregar tarea 
+            //- SECCIÓN PARA AGREGAR TAREA
+            form.d-flex.flex-row.justify-content-evenly.align-items-center.text-dark(action="/agregar" method="post" class="estilo_personalizado")
+                label.ms-2.me-2 Nueva tarea:
+                    input.me-2.ms-2(name="name" type="textbox" required)
+                label.ms-2.me-2 Categoría:
+                    input.me-2.ms-2(name="category" type="textbox" required)
+                button.btn.btn-success(type="submit" class="margen" style="width:160px") Agregar tarea 
+                
+                        
+        div.border.border-1.border-top-0
 
-    //- SECCIÓN PARA BUSCAR TAREA POR NOMBRE
-    form.card.d-flex.flex-row.justify-content-evenly.align-items-center(action="/buscar" method="get" class="estilo_personalizado")
-        label Nombre de tarea:
-        input(name="name" type="textbox" required)
-        button.btn.btn-primary(type="submit" class="margen") Buscar tarea
+            //- SECCIÓN PARA BUSCAR TAREA POR NOMBRE
+            form.d-flex.flex-row.justify-content-evenly.align-items-center.text-dark(action="/buscar" method="get" class="estilo_personalizado")
+                label Nombre de tarea:
+                input(name="name" type="textbox" required)
 
-    //- SECCIÓN PARA BUSCAR TAREA POR CATEGORÍA
-    form.card.d-flex.flex-row.justify-content-evenly.align-items-center(action="/buscarCategoria" method="get" class="estilo_personalizado")
-        label Nombre de categoría:
-        input(name="category" type="textbox" required)
+                button.btn.btn-primary(type="submit" class="margen" style="width:160px") Buscar tarea
 
-        button.btn.btn-primary(type="submit" class="margen") Buscar categoría
+        div.border.border-1.border-top-0
+            //- SECCIÓN PARA BUSCAR TAREA POR CATEGORÍA
+            form.d-flex.flex-row.justify-content-evenly.align-items-center.text-dark(action="/buscarCategoria" method="get" class="estilo_personalizado")
+                label Nombre de categoría:
+                input(name="category" type="textbox" required)
 
-    //- SECCIÓN DE BOTONERA PARA FILTRAR/MODIFICAR
-    div.card.d-flex.flex-row.justify-content-evenly.align-items-center(class="estilo_personalizado")
-        form(action="/" method="get")
-            button.btn.btn-warning(type="submit" class="margen_10") Todas las tareas
-        form(action="/realizado" method="get")
-            button.btn.btn-success(type="submit" class="margen_10") Tareas completas
-        form(action="/pendientes" method="get")
-            button.btn.btn-dark(type="submit" class="margen_10") Tareas pendientes
+                button.btn.btn-primary(type="submit" class="margen" style="width:160px") Buscar categoría
 
-    br
-    br
-    br
+        div.d-flex.flex-row.justify-content-evenly.align-items-center.border.border-1.border-top-0(class="estilo_personalizado")
+            //- SECCIÓN DE BOTONERA PARA FILTRAR/MODIFICAR
+            form(action="/" method="get")
+                button.btn.btn-warning(type="submit" class="margen_10" style="width:160px") Todas las tareas
+            form(action="/realizado" method="get")
+                button.btn.btn-success(type="submit" class="margen_10" style="width:160px") Tareas completas
+            form(action="/pendientes" method="get")
+                button.btn.btn-dark(type="submit" class="margen_10" style="width:160px") Tareas pendientes        
+
+
+
+br
+br
+br
 
 block content
 //- script(src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.2.min.js")

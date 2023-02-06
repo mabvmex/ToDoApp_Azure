@@ -14,10 +14,11 @@ a {
 }
 
 .estilo_personalizado {
-    height: 50px;
-    color: #dce0e6;
-    background-color: #606d80;
-    border-color: #606d80;
+    background-color: #7890a8;
+}
+
+.estilo_clase {
+margin-top: -15px
 }
 
 .margen {
