@@ -66,6 +66,10 @@ app.get("/buscar", (req, res, next) => {
     taskList.findTask(req, res).catch(next);
 });
 
+app.get("/buscarCategoria", (req, res, next) => {
+    taskList.findCategory(req, res).catch(next);
+});
+
 app.post("/eliminar", (req, res, next) => {
     taskList.deleteTask(req, res).catch(next);
 });

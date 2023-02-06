@@ -79,6 +79,24 @@ class TaskList {
         });
     }
 
+    async findCategory(req, res) {
+        const querySpec = {
+            query: "SELECT * FROM root c WHERE c.category=@category",
+            parameters: [
+                {
+                    name: "@category",
+                    value: req.query.category,
+                },
+            ],
+        };
+
+        const item = await this.taskObjeto.find(querySpec);
+        res.render("index", {
+            title: "Resultados de búsqueda",
+            tasks: item,
+        });
+    }
+
     // CRUD - CREAR TAREA
     async addTask(req, res) {
         const item = req.body;

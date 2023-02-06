@@ -11,7 +11,7 @@ html
             div.navbar-header
                 a.navbar-brand(href="/") &nbsp; &nbsp; &nbsp; Mi App de tareas por hacer
         br
-    
+
     h1 #{title}
     br
     br
@@ -27,12 +27,18 @@ html
 
         button.btn.btn-warning(type="submit" class="margen" ) Agregar tarea 
 
-    //- SECCIÓN PARA BUSCAR TAREA
+    //- SECCIÓN PARA BUSCAR TAREA POR NOMBRE
     form.card.d-flex.flex-row.justify-content-evenly.align-items-center(action="/buscar" method="get" class="estilo_personalizado")
         label Nombre de tarea:
         input(name="name" type="textbox")
-
         button.btn.btn-primary(type="submit" class="margen") Buscar tarea
+
+    //- SECCIÓN PARA BUSCAR TAREA POR CATEGORÍA
+    form.card.d-flex.flex-row.justify-content-evenly.align-items-center(action="/buscarCategoria" method="get" class="estilo_personalizado")
+        label Nombre de categoría:
+        input(name="category" type="textbox")
+
+        button.btn.btn-primary(type="submit" class="margen") Buscar categoría
 
     //- SECCIÓN DE BOTONERA PARA FILTRAR/MODIFICAR
     div.card.d-flex.flex-row.justify-content-evenly.align-items-center(class="estilo_personalizado")
