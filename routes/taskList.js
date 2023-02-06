@@ -115,7 +115,7 @@ class TaskList {
         });
 
         await Promise.all(tasks);
-        res.redirect("/");
+        res.redirect(req.get('referer'));
     }
 
     // CRUD - ELIMINAR TAREA
@@ -127,7 +127,7 @@ class TaskList {
             tasks.push(this.taskObjeto.deleteItem(task));
         });
         await Promise.all(tasks);
-        res.redirect("/");
+        res.redirect(req.get('referer'));
     }
 }
 
