@@ -16,42 +16,43 @@ html
     br
     br
 
-    div.border.border-dark.border-5.rounded(class="estilo_personalizado" style="width: 120vh; margin:auto;")
+    div.border.border-dark.border-5.rounded(class="estilo_personalizado" style="margin:auto;")
         table.table.table-stripped.table-bordered
             tr
                 td.fs-6.text-center.bg-primary.text-white(colspan="3") Panel de tareas
-                    
+
 
         div.d-flex.border.border-1.border-top-0.justify-content-center(class="estilo_clase")
 
             //- SECCIÓN PARA AGREGAR TAREA
-            form.d-flex.flex-row.justify-content-evenly.align-items-center.text-dark(action="/agregar" method="post" class="estilo_personalizado")
-                label.ms-2.me-2 Nueva tarea:
-                    input.me-2.ms-2(name="name" type="textbox" required)
-                label.ms-2.me-2 Categoría:
-                    input.me-2.ms-2(name="category" type="textbox" required)
+            //- form.d-flex.flex-inline-block.justify-content-evenly.align-items-center.text-dark(action="/agregar" method="post" class="estilo_personalizado")
+            form.d-flex.flex-sm-column.flex-lg-row.justify-content-evenly.align-items-center.text-dark(action="/agregar" method="post" class="estilo_personalizado")
+                label.ms-2.me-2(style="width:300px") Nueva tarea:
+                    input.ms-2(name="name" type="textbox" required style="width:200px;")
+                label.ms-2.me-2(style="width:300px") Categoría:
+                    input.me-2.ms-2(name="category" type="textbox" required style="width:200px;")
                 button.btn.btn-success(type="submit" class="margen" style="width:160px") Agregar tarea 
-                
-                        
-        div.border.border-1.border-top-0
+
+
 
             //- SECCIÓN PARA BUSCAR TAREA POR NOMBRE
+        div.border.border-1.border-top-0
             form.d-flex.flex-row.justify-content-evenly.align-items-center.text-dark(action="/buscar" method="get" class="estilo_personalizado")
-                label Nombre de tarea:
-                input(name="name" type="textbox" required)
+                label(style="width:250px") Nombre de tarea:
+                input(name="name" type="textbox" required )
 
                 button.btn.btn-primary(type="submit" class="margen" style="width:160px") Buscar tarea
 
-        div.border.border-1.border-top-0
             //- SECCIÓN PARA BUSCAR TAREA POR CATEGORÍA
+        div.border.border-1.border-top-0
             form.d-flex.flex-row.justify-content-evenly.align-items-center.text-dark(action="/buscarCategoria" method="get" class="estilo_personalizado")
-                label Nombre de categoría:
-                input(name="category" type="textbox" required)
+                label(style="width:250px") Nombre de categoría:
+                input(name="category" type="textbox" required )
 
                 button.btn.btn-primary(type="submit" class="margen" style="width:160px") Buscar categoría
 
-        div.d-flex.flex-row.justify-content-evenly.align-items-center.border.border-1.border-top-0(class="estilo_personalizado")
             //- SECCIÓN DE BOTONERA PARA FILTRAR/MODIFICAR
+        div.d-flex.flex-row.justify-content-evenly.align-items-center.border.border-1.border-top-0(class="estilo_personalizado")
             form(action="/" method="get")
                 button.btn.btn-warning(type="submit" class="margen_10" style="width:160px") Todas las tareas
             form(action="/realizado" method="get")
