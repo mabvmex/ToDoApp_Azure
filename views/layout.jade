@@ -17,12 +17,12 @@ html
     br
 
     div.border.border-dark.border-5.rounded(class="estilo_personalizado" style="margin:auto;")
-        table.table.table-stripped.table-bordered
+        table.table.table-stripped.table-bordered.border-dark
             tr
                 td.fs-6.text-center.bg-primary.text-white(colspan="3") Panel de tareas
 
 
-        div.d-flex.border.border-1.border-top-0.justify-content-center(class="estilo_clase")
+        div.d-flex.border.border-1.border-dark.border-top-0.justify-content-center(class="estilo_clase")
 
             //- SECCIÓN PARA AGREGAR TAREA
             //- form.d-flex.flex-inline-block.justify-content-evenly.align-items-center.text-dark(action="/agregar" method="post" class="estilo_personalizado")
@@ -36,7 +36,7 @@ html
 
 
             //- SECCIÓN PARA BUSCAR TAREA POR NOMBRE
-        div.border.border-1.border-top-0
+        div.border.border-1.border-top-0.border-dark
             form.d-flex.flex-row.justify-content-evenly.align-items-center.text-dark(action="/buscar" method="get" class="estilo_personalizado")
                 label(style="width:250px") Nombre de tarea:
                 input(name="name" type="textbox" required )
@@ -44,7 +44,7 @@ html
                 button.btn.btn-primary(type="submit" class="margen" style="width:160px") Buscar tarea
 
             //- SECCIÓN PARA BUSCAR TAREA POR CATEGORÍA
-        div.border.border-1.border-top-0
+        div.border.border-1.border-top-0.border-dark
             form.d-flex.flex-row.justify-content-evenly.align-items-center.text-dark(action="/buscarCategoria" method="get" class="estilo_personalizado")
                 label(style="width:250px") Nombre de categoría:
                 input(name="category" type="textbox" required )
@@ -52,7 +52,7 @@ html
                 button.btn.btn-primary(type="submit" class="margen" style="width:160px") Buscar categoría
 
             //- SECCIÓN DE BOTONERA PARA FILTRAR/MODIFICAR
-        div.d-flex.flex-row.justify-content-evenly.align-items-center.border.border-1.border-top-0(class="estilo_personalizado")
+        div.d-flex.flex-row.justify-content-evenly.align-items-center.border.border-1.border-top-0.border-dark(class="estilo_personalizado")
             form(action="/" method="get")
                 button.btn.btn-warning(type="submit" class="margen_10" style="width:160px") Todas las tareas
             form(action="/realizado" method="get")
